@@ -11,9 +11,9 @@ function Root() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <MainTemplate>
-        <div>
+        
           <Tasks />
-        </div>
+        
       </MainTemplate>
     </ThemeProvider>
   );

@@ -29,6 +29,10 @@ export const TaskWrapper = styled(ViewWrapper)`
 
   //checkbox
   & .check-box {
+    appearance: radio;
+    border: none;
+    background-color: red;
+    border-radius: 50%;
   }
 `;
 

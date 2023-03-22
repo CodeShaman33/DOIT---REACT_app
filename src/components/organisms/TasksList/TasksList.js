@@ -7,6 +7,7 @@ import TaskItem from "components/atoms/TaskItem/TaskItem";
 const TasksList = () => {
   return (
     <Wrapper>
+        <h1>Task List:</h1>
       <TaskItem />
       <TaskItem />
       <TaskItem />
