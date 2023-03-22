@@ -4,7 +4,7 @@ export const theme = {
       midBlue: '#5b9eb3',
       lightViolet: '#84a4e8',
       black: '#000000',
-      
+
 
     },
     fontSize: {
@@ -13,4 +13,5 @@ export const theme = {
       m: '12px',
       s: '11px',
     },
+    uniBorder: '1px black solid',
   };
