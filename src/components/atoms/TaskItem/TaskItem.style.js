@@ -32,7 +32,8 @@ export const TaskWrapper = styled(ViewWrapper)`
     appearance: radio;
     border: none;
     background-color: red;
-    border-radius: 50%;
+    border-radius: 22%;
+    
   }
 `;
 

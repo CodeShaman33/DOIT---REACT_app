@@ -1,0 +1,73 @@
+export const TasksTable = [
+    {
+      id: '1',
+      task: 'Complete project report',
+      date: '2023-04-15',
+      note: 'Remember to include budget summary',
+      priority: 3,
+    },
+    {
+      id: '2',
+      task: 'Schedule team meeting',
+      date: '2023-03-28',
+      note: '',
+      priority: 2,
+    },
+    {
+      id: '3',
+      task: 'Follow up with client',
+      date: '2023-04-01',
+      note: 'They requested a status update',
+      priority: 1,
+    },
+    {
+      id: '4',
+      task: 'Review resumes for new hires',
+      date: '2023-04-10',
+      note: '',
+      priority: 4,
+    },
+    {
+      id: '5',
+      task: 'Prepare presentation for conference',
+      date: '2023-04-22',
+      note: 'Topic: The Future of AI',
+      priority: 3,
+    },
+    {
+      id: '6',
+      task: 'Send out weekly newsletter',
+      date: '2023-03-29',
+      note: 'Include upcoming events',
+      priority: 2,
+    },
+    {
+      id: '7',
+      task: 'Research new software tools',
+      date: '2023-04-05',
+      note: '',
+      priority: 1,
+    },
+    {
+      id: '8',
+      task: 'Meet with marketing team',
+      date: '2023-04-12',
+      note: 'Discuss new advertising campaign',
+      priority: 4,
+    },
+    {
+      id: '9',
+      task: 'Update website content',
+      date: '2023-04-20',
+      note: '',
+      priority: 3,
+    },
+    {
+      id: '10',
+      task: 'Organize team building event',
+      date: '2023-05-01',
+      note: 'Location: Central Park',
+      priority: 2,
+    },
+  ];
+  

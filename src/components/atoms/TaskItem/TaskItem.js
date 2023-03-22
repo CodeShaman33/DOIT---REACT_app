@@ -9,6 +9,7 @@ const TaskItem = () => {
 
   const handleDateChange = (event) => {
     setDate(event.target.value);
+    console.log(date);
   };
 
   return (
