@@ -12,6 +12,9 @@ export const TaskWrapper = styled(ViewWrapper)`
   padding: 15px;
   min-height: 100px;
   max-height: 200px;
+  margin: 0;
+  margin-bottom: 14px;
+  border-radius: 13px;
 
   & *,
   *::after,
@@ -38,7 +41,7 @@ export const MainArea = styled.div`
 
   & .content {
     width: 100%;
-    height: 60px;
+    height: 50px;
   }
 
   & .add-ons {
@@ -56,8 +59,8 @@ export const Options = styled.div`
 `;
 
 export const TaskButton = styled(Button)`
-margin: 0;
-width: 100%;
-padding: 5px 0;
-border-radius: 10px;
-`
+  margin: 0;
+  width: 100%;
+  padding: 5px 0;
+  border-radius: 10px;
+`;

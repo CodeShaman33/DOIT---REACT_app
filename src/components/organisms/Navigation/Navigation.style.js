@@ -1,8 +1,4 @@
-
-
-
-
-import styled from 'styled-components';
+import styled from "styled-components";
 // import { NavLink } from 'react-router-dom';
 
 export const Wrapper = styled.nav`
@@ -35,18 +31,17 @@ export const Logo = styled.div`
 // styled(NavLink).attrs({ activeClassName })`
 // const activeClassName = 'active-link';
 export const StyledLink = styled.div`
-border: ${({theme}) => theme.uniBorder};
+  border: ${({ theme }) => theme.uniBorder};
   font-weight: bold;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.black};
   text-align: right;
   margin: 15px 20px 15px auto;
   position: relative;
-  
-  
+
   &::after {
     opacity: 1;
-    content: '';
+    content: "";
     position: absolute;
     width: 10px;
     height: 10px;
