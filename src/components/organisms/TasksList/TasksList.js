@@ -1,15 +1,17 @@
 import React from "react";
 //styles
-import { ViewWrapper } from "components/templates/ViewWrapper";
 import { Wrapper } from "./TasksList.style";
+//components
+import TaskItem from "components/atoms/TaskItem/TaskItem";
 
 const TasksList = () => {
   return (
     <Wrapper>
-      <ViewWrapper>sdfssfsd</ViewWrapper>
-      <ViewWrapper>sdfssfsd</ViewWrapper>
-      <ViewWrapper>sdfssfsd</ViewWrapper>
-      <ViewWrapper>sdfssfsd</ViewWrapper>
+      <TaskItem />
+      <TaskItem />
+      <TaskItem />
+      <TaskItem />
+
     </Wrapper>
   );
 };
