@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //components
 import MainTemplate from "components/templates/MainTemplate";
 import Tasks from "./Tasks";
-
 function Root() {
+  
   return (
     <Router>
       <ThemeProvider theme={theme}>

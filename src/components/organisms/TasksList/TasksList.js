@@ -4,14 +4,14 @@ import { Wrapper } from "./TasksList.style";
 //components
 import TaskItem from "components/atoms/TaskItem/TaskItem";
 
-const TasksList = ({tasks}) => {
+const TasksList = ({tasks, handleOpenTaskDetail}) => {
   console.log(tasks);
   return (
     <Wrapper>
         <h1>Task List:</h1>
-      <TaskItem />
+      
       {tasks.map((task) =>(
-        <div>{task.task}</div>
+        <TaskItem onClick={() => handleOpenTaskDetail(task.task)} task={task}/>
       ))}
     </Wrapper>
   );

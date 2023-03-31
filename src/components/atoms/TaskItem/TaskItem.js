@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TaskWrapper, MainArea, Options, TaskButton } from "./TaskItem.style";
 //components
 
-const TaskItem = () => {
+const TaskItem = ({task, ...props}) => {
   const [date, setDate] = useState(null);
 
   const handleDateChange = (event) => {
@@ -14,14 +14,14 @@ const TaskItem = () => {
 
   return (
     <>
-      <TaskWrapper>
+      <TaskWrapper {...props}>
         <div className="check-box">
           <input type="checkbox" />
         </div>
         <MainArea>
-          <div className="content">{date}</div>
+          <div className="content">{task.task}</div>
           <div className="add-ons">
-            <label htmlFor="priority">priority</label>
+            <label htmlFor="priority"></label>
             <select name="priority" id="priority">
               <option value="1">1</option>
               <option value="2">2</option>
