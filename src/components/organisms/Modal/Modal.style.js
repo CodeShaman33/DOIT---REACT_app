@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import ReactModal from 'react-modal';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(ReactModal)`
   position: absolute;
   padding: 40px;
   top: 50%;
@@ -8,7 +9,7 @@ export const Wrapper = styled.div`
   transform: translate(-50%, -50%);
   min-width: 600px;
   min-height: 600px;
-  background-color: aquamarine;
+  background-color: aquamarine; 
   border-radius: 15px;
   -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
   -moz-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);
@@ -16,5 +17,5 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-`;
+  align-items: center; 
+`

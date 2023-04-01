@@ -11,7 +11,7 @@ const TasksList = ({tasks, handleOpenTaskDetail}) => {
         <h1>Task List:</h1>
       
       {tasks.map((task) =>(
-        <TaskItem onClick={() => handleOpenTaskDetail(task.task)} task={task}/>
+        <TaskItem onClick={() => handleOpenTaskDetail(task)} task={task}/>
       ))}
     </Wrapper>
   );

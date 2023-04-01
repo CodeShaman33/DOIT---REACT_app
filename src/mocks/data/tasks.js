@@ -1,4 +1,4 @@
-export const TasksTable = [
+export let TasksTable = [
     {
       id: '1',
       task: 'Complete project report',
