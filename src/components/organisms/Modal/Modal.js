@@ -5,7 +5,7 @@ import { Wrapper } from "./Modal.style";
 const Modal = ({children, handleModalClose, isOpen}) => {
 
   return (
-    <Wrapper isOpen={isOpen} onRequestClose={handleModalClose}>
+    <Wrapper appElement={document.getElementById('root')} isOpen={isOpen} onRequestClose={handleModalClose}>
         {children}
         <button  onClick={handleModalClose}>
             close modal
