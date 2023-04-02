@@ -1,8 +1,11 @@
 import {rest} from 'msw';
 import { TasksTable } from 'mocks/data/tasks';
+import { db } from 'mocks/db';
+
 export const handlers = [
     rest.get('/', (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json({TasksTable}));
+        const allTasks = db.task.getAll();
+        return res(ctx.status(200), ctx.json({allTasks}));
     }),
 
     rest.put(`/api/updateTask/:id`, (req, res, ctx) => {

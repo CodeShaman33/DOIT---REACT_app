@@ -27,14 +27,7 @@ export const TaskWrapper = styled(ViewWrapper)`
     max-height: auto;
   }
 
-  //checkbox
-  & .check-box {
-    appearance: radio;
-    border: none;
-    background-color: red;
-    border-radius: 22%;
-    
-  }
+
 `;
 
 export const MainArea = styled.div`
@@ -69,3 +62,4 @@ export const TaskButton = styled(Button)`
   padding: 5px 0;
   border-radius: 10px;
 `;
+

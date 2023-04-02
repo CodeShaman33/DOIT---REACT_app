@@ -7,7 +7,7 @@ export const useTasks = () => {
 
 useEffect(() => {
         axios.get('/')
-        .then(response => {setTasks(response.data.TasksTable)} )
+        .then(response => {setTasks(response.data.allTasks)} )
         .catch(err => {console.log(err)});
     }, []);
 
