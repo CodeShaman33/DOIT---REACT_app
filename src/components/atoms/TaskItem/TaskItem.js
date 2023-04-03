@@ -15,10 +15,10 @@ const TaskItem = ({task, ...props}) => {
 
   return (
     <>
-      <TaskWrapper {...props}>
+      <TaskWrapper >
         <CheckBox priority={task.priority}/>
         <MainArea>
-          <div className="content">{task.task}</div>
+          <div className="content" {...props}>{task.task}</div>
           <div className="add-ons">
             <label htmlFor="priority"></label>
             <select name="priority" id="priority">
@@ -35,7 +35,6 @@ const TaskItem = ({task, ...props}) => {
           <TaskButton>Delete</TaskButton>
         </Options>
       </TaskWrapper>
-      <div>dsfds</div>
     </>
   );
 };

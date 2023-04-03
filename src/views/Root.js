@@ -4,9 +4,11 @@ import { GlobalStyle } from "assets/styles/GlobalStyle";
 import { theme } from "assets/styles/theme";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Wrapper, FormWrapper } from "./Root.style";
+import {useForm} from 'react-hook-form'
 //components
 import MainTemplate from "components/templates/MainTemplate";
 import Tasks from "./Tasks";
+import axios from "axios";
 
 //authenticated app
 const AuthenticatedApp = () => {
@@ -23,36 +25,90 @@ const AuthenticatedApp = () => {
   );
 };
 
+const handleSignIn = async ({ login, password }) => {
+  try {
+    const response = await axios.post('/login', {
+      login,
+      password,
+    });
+    localStorage.setItem('token', response.data.token);
+  } catch (e) {
+  }
+};
+
+const onSubmit = ({login, password}) => {
+  console.log(password);
+  axios.post('/login', {
+    login, 
+    password,
+  })
+  .then((response) => console.log(response))
+  .catch((e) => console.log('e'))
+};
+
 //UnauthenticatedApp
-const UnauthenticatedApp = () => {
+const UnauthenticatedApp = ({handleSignIn}) => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
   return (
     <FormWrapper>
-      <form action="">
-        <label htmlFor="login" name="login" id="loginLabel">
-          Enter login:
-        </label>
-        <input type="text" id="login" />
-        <label htmlFor="password" name="password" id="passwordLabel">
-          Enter password:
-        </label>
-        <input type="password" id="password" />
-        <button type="submit" id="formButton">Log In</button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="login">enter login:</label>
+        <input
+        id="login"
+          type="login"
+          {...register("login", {
+            required: "Required",
+           
+          })}
+        />
+        {errors.login && errors.login.message}
+
+        <input id="password"
+        type="password"
+          {...register("password")}
+        />
+        {errors.password && errors.password.message}
+
+        <button type="submit">Submit</button>
       </form>
     </FormWrapper>
   );
 };
 
 function Root() {
-  const [user, setUser] = React.useState(null)
+  const [user, setUser] = React.useState(null);
 
-  const login = (data) => {
-    
-  }
+  React.useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      (async () => {
+        try {
+          const response = await axios.get('/me', {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          });
+          setUser(response.data);
+        } catch (e) {
+          console.log(e);
+        }
+      })();
+    }
+  }, []);
+
+  
+
+
+
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+        {user ? <AuthenticatedApp /> : <UnauthenticatedApp login={handleSignIn}/>}
       </ThemeProvider>
     </Router>
   );

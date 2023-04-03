@@ -11,6 +11,7 @@ const createTasks = () => {
 }
 
 createTasks();
+db.user.create();
 
 window.mocks = {
     createTasks,

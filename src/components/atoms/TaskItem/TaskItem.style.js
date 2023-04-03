@@ -15,11 +15,12 @@ export const TaskWrapper = styled(ViewWrapper)`
   margin: 0;
   margin-bottom: 14px;
   border-radius: 13px;
+  width: 99%;
 
   & *,
   *::after,
   *::before {
-    border: ${({ theme }) => theme.uniBorder};
+    /* border: ${({ theme }) => theme.uniBorder}; */
   }
 
   & > *:not(.check-box) {
@@ -40,11 +41,19 @@ export const MainArea = styled.div`
   & .content {
     width: 100%;
     height: 50px;
+    padding: 5px;
+    background-color: grey;
+    border-radius: 7px;
+    cursor: pointer;
   }
 
   & .add-ons {
     width: 100%;
     flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
   }
 `;
 
