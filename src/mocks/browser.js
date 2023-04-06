@@ -16,3 +16,5 @@ window.mocks = {
     createTasks,
     getTasks: () => db.task.getAll()
 }
+
+db.user.create();

@@ -9,5 +9,12 @@ export const db = factory({
         date: () => faker.date.betweens('2020-01-01T00:00:00.000Z', '2030-01-01T00:00:00.000Z'),
         note: () => faker.fake(`{{name.lastName}}`),
         priority: () => faker.datatype.number({min:1, max:4})
-    }
+    }, 
+
+    user: {
+        id: primaryKey(() => '1'),
+        name: () => 'Jacek Sobczak',
+        login: () => 'luckyloki33@gmail.com',
+        password: () => '1234',
+      },
 })
