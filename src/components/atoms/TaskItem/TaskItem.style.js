@@ -39,7 +39,7 @@ export const MainArea = styled.div`
 
   & .content {
     width: 100%;
-    height: 50px;
+    height: auto;
   }
 
   & .add-ons {
