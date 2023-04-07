@@ -2,6 +2,8 @@ import axios from "axios";
 // import { response } from "msw";
 import { useEffect, useState } from "react";
 
+const tasksAPI = axios.create({});
+
 export const useTasks = () => {
     const [tasks, setTasks] = useState([]);
 
