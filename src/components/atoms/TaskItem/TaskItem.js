@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 //style
-import { TaskWrapper, MainArea, Options, TaskButton } from "./TaskItem.style";
+import { TaskWrapper, MainArea } from "./TaskItem.style";
 //components
 import CheckBox from "../CheckBox/CheckBox";
 
@@ -15,10 +15,10 @@ const TaskItem = ({task, ...props}) => {
 
   return (
     <>
-      <TaskWrapper {...props}>
+      <TaskWrapper >
         <CheckBox priority={task.priority}/>
         <MainArea>
-          <div className="content">{task.task}</div>
+          <div {...props} className="content">{task.task}</div>
           <div className="add-ons">
             <label htmlFor="priority"></label>
             <select name="priority" id="priority">
@@ -30,12 +30,11 @@ const TaskItem = ({task, ...props}) => {
             <input type="date" onChange={handleDateChange} />
           </div>
         </MainArea>
-        <Options>
+        {/* <Options>
           <TaskButton>Set Date</TaskButton>
           <TaskButton>Delete</TaskButton>
-        </Options>
+        </Options> */}
       </TaskWrapper>
-      <div>dsfds</div>
     </>
   );
 };

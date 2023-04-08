@@ -4,6 +4,7 @@ import { Wrapper } from "./MainTemplate.style";
 import Navigation from "components/organisms/Navigation/Navigation";
 import SearchBar from "components/organisms/SearchBar/SearchBar";
 import NotesSection from "components/organisms/NotesSection/NotesSection";
+import NotesWidget from "components/organisms/NotesWidget/NotesWidget";
 
 const MainTemplate = ({ children }) => {
   return (
@@ -12,6 +13,7 @@ const MainTemplate = ({ children }) => {
       <SearchBar />
       {children}
       <NotesSection />
+      <NotesWidget />
     </Wrapper>
   );
 };

@@ -4,11 +4,10 @@ import { Button } from "../Button/Button";
 import styled from "styled-components";
 
 export const TaskWrapper = styled(ViewWrapper)`
-  background-color: white;
+  background-color: #28989c;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   padding: 15px;
   min-height: 100px;
   max-height: 200px;
@@ -16,10 +15,14 @@ export const TaskWrapper = styled(ViewWrapper)`
   margin-bottom: 14px;
   border-radius: 13px;
 
+  &:first-child {
+    margin-right: 100px;
+  }
+
   & *,
   *::after,
   *::before {
-    border: ${({ theme }) => theme.uniBorder};
+    /* border: ${({ theme }) => theme.uniBorder}; */
   }
 
   & > *:not(.check-box) {
@@ -27,7 +30,7 @@ export const TaskWrapper = styled(ViewWrapper)`
     max-height: auto;
   }
 
-
+ 
 `;
 
 export const MainArea = styled.div`

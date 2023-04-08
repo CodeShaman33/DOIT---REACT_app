@@ -31,13 +31,23 @@ export const Logo = styled.div`
 // styled(NavLink).attrs({ activeClassName })`
 // const activeClassName = 'active-link';
 export const StyledLink = styled.div`
-  border: ${({ theme }) => theme.uniBorder};
   font-weight: bold;
   text-decoration: none;
   color: ${({ theme }) => theme.colors.black};
   text-align: right;
+  width: 80%;
+  padding: 4px;
+  margin-right: 3px;
+  border-radius: 6px;
+
   margin: 15px 20px 15px auto;
   position: relative;
+  background-color: #28989c;
+
+  & a {
+    text-decoration: none;
+    color: black;
+  }
 
   &::after {
     opacity: 1;

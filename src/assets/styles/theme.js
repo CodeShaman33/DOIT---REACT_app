@@ -1,7 +1,7 @@
 export const theme = {
     colors: {
       white: '#ffffff',
-      midBlue: 'lightGray',
+      midBlue: '#1c477a',
       lightViolet: '#84a4e8',
       black: '#000000',
 
