@@ -3,7 +3,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "assets/styles/GlobalStyle";
 import { theme } from "assets/styles/theme";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { AuthProvider } from "hooks/useAuth";
 
 const AppProviders = ({ children }) => {
@@ -12,7 +12,10 @@ const AppProviders = ({ children }) => {
       <ThemeProvider theme={theme}>
         <AuthProvider>
           <GlobalStyle />
+          <Switch>
           {children} 
+
+          </Switch>
         </AuthProvider>
       </ThemeProvider>
     </Router>

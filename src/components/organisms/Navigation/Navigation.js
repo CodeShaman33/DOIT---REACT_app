@@ -2,7 +2,7 @@ import React from "react";
 import { useAuth } from "hooks/useAuth";
 import { StyledLink, Logo } from "./Navigation.style";
 import { Wrapper } from "./Navigation.style";
-
+import { Link } from "react-router-dom";
 const Navigation = () => {
   const auth = useAuth();
 
@@ -15,9 +15,13 @@ const Navigation = () => {
           brotha
         </h1>
       </Logo>
-      <StyledLink to="/group">Dashasdasboard</StyledLink>
-      <StyledLink to="/group">Dashboard</StyledLink>
-      <StyledLink to="/group">Dashasdsboard</StyledLink>
+      <StyledLink >
+        <Link to='/' >Dashboard</Link>
+      </StyledLink>
+      <StyledLink >
+        <Link to='/notes' >Notes</Link>
+      </StyledLink>
+      {/* <StyledLink to="/group">Dashasdsboard</StyledLink> */}
       <StyledLink as="a" onClick={auth.signOut}>
         Log out
       </StyledLink>
