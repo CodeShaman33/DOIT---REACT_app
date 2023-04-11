@@ -12,6 +12,17 @@ export const addNote = (payload) => {
     }
 }
 
+export const addTask = (payload) => {
+    return {
+        type: 'tasks/add',
+        payload: {
+            id: uuid(),
+            ...payload,
+        }
+    }
+}
+
+
 
 export const removeNote = (payload) => {
     return {
@@ -29,6 +40,14 @@ const initialState = {
         }, 
        
     ],
+    tasks: [
+        {
+            id: uuid(),
+            content: 'first task orem ipsum content',
+            priority: 1,
+            // done: false,
+        }
+    ]
 }
 
 const notesReducer = (state = initialState, action) => {
@@ -45,6 +64,12 @@ const notesReducer = (state = initialState, action) => {
                 notes: state.notes.filter(note => note.id !== action.payload.id)
             }
 
+        case 'tasks/add': 
+            return {
+                ...state,
+                tasks: [...state.tasks, action.payload]
+
+            }
         default: 
         return state; 
      }

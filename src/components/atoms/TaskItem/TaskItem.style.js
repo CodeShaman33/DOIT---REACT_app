@@ -14,10 +14,7 @@ export const TaskWrapper = styled(ViewWrapper)`
   margin: 0;
   margin-bottom: 14px;
   border-radius: 13px;
-
-  &:first-child {
-    margin-right: 100px;
-  }
+  position: relative;
 
   & *,
   *::after,
@@ -29,8 +26,6 @@ export const TaskWrapper = styled(ViewWrapper)`
     min-height: 80px;
     max-height: auto;
   }
-
- 
 `;
 
 export const MainArea = styled.div`
@@ -39,6 +34,7 @@ export const MainArea = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 30px;
 
   & .content {
     width: 100%;
@@ -46,8 +42,13 @@ export const MainArea = styled.div`
   }
 
   & .add-ons {
-    width: 100%;
-    flex: 1;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    & select {
+      margin-right: 20px;
+    }
   }
 `;
 
@@ -65,4 +66,3 @@ export const TaskButton = styled(Button)`
   padding: 5px 0;
   border-radius: 10px;
 `;
-

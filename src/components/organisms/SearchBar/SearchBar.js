@@ -1,7 +1,6 @@
 import React from "react";
 //style
-import { SearchBarWrapper, SearchButton } from "./SearchBar.style";
-import { Input } from "components/atoms/Input/Input";
+import { SearchBarWrapper, SearchButton, Input } from "./SearchBar.style";
 
 const SearchBar = () => {
   return (

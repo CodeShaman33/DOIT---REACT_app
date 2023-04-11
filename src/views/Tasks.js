@@ -28,6 +28,7 @@ const Tasks = () => {
 
   return (
     <>
+  
     <TasksList handleOpenTaskDetail={handleOpenTaskDetail} tasks={tasks} />
    <Modal isOpen={modalState} handleModalClose={handleModalClose}>
       <h1>{modalData.task}</h1>

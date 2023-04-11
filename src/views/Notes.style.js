@@ -13,7 +13,7 @@ export const FormWrapper = styled.div`
     background-color: white;
     border-radius: 25px;
     width: 100%;
-    height: 600px;
+    height: 350px;
     padding: 10px;
     display: flex;
     flex-direction: column;

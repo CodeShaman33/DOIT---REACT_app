@@ -9,25 +9,39 @@ import { useState } from "react";
 const Notes = () => {
   const notes = useSelector((state) => state.notes);
   const dispatch = useDispatch();
-  const [newTitle, setNewTitle] = useState('');
-  const [newContent, setNewContent] = useState('');
+  const [newTitle, setNewTitle] = useState("");
+  const [newContent, setNewContent] = useState("");
 
   const handleAddNote = (e) => {
     e.preventDefault();
-    dispatch(addNote({
-        title: newTitle,
+    dispatch(
+      addNote({
+        title: newTitle,  
         content: newContent,
-    }))
-  }
-  return ( 
+      })
+    );
+  };
+  return (
     <Wrapper>
       {console.log(notes)}
       <FormWrapper as="form">
         <label htmlFor="title">title:</label>
-        <input type="text" id="title" name="title" onChange={(e)=> setNewTitle(e.target.value)} />
+        <input
+          type="text"
+          id="title"
+          name="title"
+          onChange={(e) => setNewTitle(e.target.value)}
+        />
         <label htmlFor="content">content:</label>
-        <input type="text-area" name="content" id="content" onChange={(e)=> setNewContent(e.target.value)}/>
-        <button type="submit" onClick={handleAddNote}>Add Note</button>
+        <input
+          type="text-area"
+          name="content"
+          id="content"
+          onChange={(e) => setNewContent(e.target.value)}
+        />
+        <button type="submit" onClick={handleAddNote}>
+          Add Note
+        </button>
       </FormWrapper>
       <NotesWrapper>
         {console.log(notes)}
