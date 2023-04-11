@@ -1,21 +1,21 @@
 import React from "react";
 import { NoteWrapper } from "./Note.style";
+import { useDispatch } from "react-redux";
+import { removeNote } from "store";
 
-const Note = () => {
+const Note = ({title = 'untitled', content = 'no content', noteId}) => {
+  const dispatch = useDispatch(); 
+
+  const handleRemoveNote = () => {
+    dispatch(dispatch(removeNote({id: noteId})));
+  }
   return (
     <NoteWrapper>
-      <h2>title</h2>
+      <h2>{title}</h2>
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
+        {content}
       </p>
+      <button onClick={handleRemoveNote}>delete note</button>
     </NoteWrapper>
   );
 };
