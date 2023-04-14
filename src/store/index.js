@@ -1,15 +1,7 @@
-//those actions are not muting existing state, they copy all of exiting state and works on them
-// import { createStore } from "redux"
 import {v4 as uuid } from 'uuid'
-// import axios from "axios"
-import { createSlice, configureStore } from "@reduxjs/toolkit"
-const initialNotesState =  [
-        {
-            id: uuid(),
-            title: 'first note lorem ipsum',
-            content: 'first note lorem ipsum content'
-        }, 
-    ]
+import { createSlice, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
+import { createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+
 
 const initialTasksState = [
     {
@@ -24,53 +16,38 @@ const initialTasksState = [
 
 
 
-// export const addNote = (payload) => {
-//     return {
-//         type: 'notes/add',
-//         payload: {
-//             id: uuid(),
-//             ...payload,
-//         }
-//     }
-// }
-
-// export const addTask = (payload) => {
-//     return {
-//         type: 'tasks/add',
-//         payload: {
-//             id: uuid(),
-//             ...payload,
-//         }
-//     }
-// }
-
-
-
-// export const removeNote = (payload) => {
-//     return {
-//         type: 'notes/remove',
-//         payload
-//     }
-// }
-
-
-
-const notesSlice = createSlice({
-    name: 'notes',
-    initialState: initialNotesState,
-    reducers: {
-        addNote(state, action) {
-            state.push({
-                id: uuid(),
-                ...action.payload,
+const notesApi = createApi({
+    baseQuery: fetchBaseQuery({
+        baseUrl: '/',
+    }),
+    tagTypes: ['Notes'],
+    endpoints: (builder) => ({
+        getNotes: builder.query({
+            query: () => 'notes',
+            providesTags: ['Notes'],
+        }),
+        addNote: builder.mutation({
+            query: (body) => ({
+                url: 'notes',
+                method: 'POST',
+                body,  
+            }),
+            invalidatesTags: ['Notes'],  
+        }),
+        removeNote: builder.mutation({
+            query: (id) => ({
+                url: `notes/${id}`,
+                method: 'DELETE',
+                }),
+                invalidatesTags: ['Notes'],
             })
-        },
-        removeNote(state, action) {
-            return state.filter(note => note.id !== action.payload.id)
-        },
-    }
+        })
+    })
 
-})
+
+export const {useGetNotesQuery, useAddNoteMutation, useRemoveNoteMutation } = notesApi;
+export const api = notesApi;
+
 
 const tasksSlice = createSlice({
     name: 'tasks',
@@ -87,17 +64,41 @@ const tasksSlice = createSlice({
 
 })
 
+const tasks = createApi({
+    baseQuery: fetchBaseQuery({
+        baseUrl: '/',
+    }),
+    tagTypes: ['Tasks'],
+    endpoints: (builder) => ({
+        getNotes: builder.query({
+            query: () => '/',
+            providesTags: ['Tasks'],
+        }),
+        addNote: builder.mutation({
+            query: (body) => ({
+                url: 'notes',
+                method: 'POST',
+                body,  
+            }),
+            invalidatesTags: ['Notes'],  
+        })
+    })
+})
 
 
-export const {addNote, removeNote} = notesSlice.actions
+
+// export const {addNote, removeNote} = notesSlice.actions
 export const {addTask, removeTask} = tasksSlice.actions
 
 
 export const store = configureStore({
 
     reducer: {
-        notes: notesSlice.reducer,
+        [notesApi.reducerPath]: notesApi.reducer,
         tasks: tasksSlice.reducer
 
-    }
+    },
+
+    middleware: () =>
+    getDefaultMiddleware().concat(api.middleware),
 })
