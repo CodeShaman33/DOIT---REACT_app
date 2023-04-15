@@ -4,21 +4,28 @@ import { useState } from "react";
 import { TaskWrapper, MainArea } from "./TaskItem.style";
 //components
 import CheckBox from "../CheckBox/CheckBox";
+import { useRemoveTaskMutation } from "store";
 
 const TaskItem = ({task, ...props}) => {
   const [date, setDate] = useState(null);
-
+  const [removeTask, rest] = useRemoveTaskMutation();
   const handleDateChange = (event) => {
     setDate(event.target.value);
     console.log(date);
+    console.log(rest);
   };
+
+  const handleRemoveTask = (event) => {
+    event.preventDefault();
+    removeTask(task.id)
+  }
 
   return (
     <>
       <TaskWrapper >
         <CheckBox priority={task.priority}/>
         <MainArea>
-          <div {...props} className="content">{task.task}</div>
+          <div {...props} className="content">{task.content}</div>
           <div className="add-ons">
             <label htmlFor="priority"></label>
             <select name="priority" id="priority">
@@ -28,6 +35,7 @@ const TaskItem = ({task, ...props}) => {
               <option value="4">4</option>
             </select>
             <input type="date" onChange={handleDateChange} />
+            <button onClick={handleRemoveTask}>delete</button>
           </div>
         </MainArea>
         {/* <Options>

@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 export const db = factory({
   task: {
     id: primaryKey(faker.datatype.uuid),
-    task: () =>
+    content: () =>
       `${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()}`,
     date: () =>
       faker.date.betweens(

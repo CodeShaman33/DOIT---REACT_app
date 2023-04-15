@@ -21,7 +21,7 @@ const NotesWidget = () => {
         <>
         {data.notes.length > 0 ? (
           data.notes.map(({ title, content, id }) => (
-            <Note noteId={id} title={title} content={content} />
+            <Note noteId={id} title={title} content={content} key={id}/>
           ))
         ) : (
           <h2>no notes yet</h2>

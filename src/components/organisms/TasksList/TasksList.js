@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import { Wrapper, FormWrapper } from "./TasksList.style";
 //components
 import TaskItem from "components/atoms/TaskItem/TaskItem";
-// import { TaskWrapper } from "components/atoms/TaskItem/TaskItem.style";
-import { useSelector } from "react-redux";
-// import { useDispatch } from "react-redux";
 import { useAddTaskMutation } from "store";
 
 
@@ -13,7 +10,6 @@ const TasksList = ({tasks, handleOpenTaskDetail}) => {
 
   
 
-  const storedTasks = useSelector((state) => state.tasks);
   // const dispatch = useDispatch();
   const[addTask, rest] = useAddTaskMutation();
   console.log(rest);
@@ -33,7 +29,6 @@ const handleAddTask = (e) => {
 }
 
 
-  console.log(storedTasks);
   return (
     <Wrapper>
         <h1>Task List:</h1>
@@ -50,7 +45,7 @@ const handleAddTask = (e) => {
       <button type="submit">add task</button>
     </FormWrapper>
       {tasks.map((task) =>(
-        <TaskItem onClick={() => handleOpenTaskDetail(task)} task={task}/>
+        <TaskItem onClick={() => handleOpenTaskDetail(task)} task={task} key={task.id}/>
       ))}
     </Wrapper>
   );

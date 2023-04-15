@@ -10,19 +10,11 @@ export const tasksHandlers = [
     return res(ctx.status(200), ctx.json({ tasks: tasks }));
   }),
 
-  // rest.put(`/api/updateTask/:id`, (req, res, ctx) => {
-  //   const id = req.params.id;
-  //   console.log(id);
 
-  //   const currentTask = db.task.findFirst({ where: { id: id } });
-
-  //   currentTask.task = "req.body";
-  //   db.task.save(currentTask);
-  //   return res(ctx.status(200));
-  // }),
 
   rest.post('tasks', (req, res, ctx) => {
     console.log('TASK POST STARTED');
+    console.log(req.body);
     if(req.body.content && req.body.priority){
       
 
@@ -42,5 +34,37 @@ export const tasksHandlers = [
 
     }
 
+  }),
+
+  rest.delete('/tasks/:id', (req,res,ctx) => {
+    const {id} = req.params
+    console.log(id)
+    // console.log(req.body.id)
+    if(id) {
+      const removedTask = db.task.delete({
+        where: {
+          id: {
+            equals: id
+          }
+        }
+      })
+
+      return res(ctx.status(200), ctx.json({removedTask}))
+    }
+
+    return res(ctx.status(400), ctx.json({
+      error: 'please try again'
+    }))
   })
+
+    // rest.put(`/api/updateTask/:id`, (req, res, ctx) => {
+  //   const id = req.params.id;
+  //   console.log(id);
+
+  //   const currentTask = db.task.findFirst({ where: { id: id } });
+
+  //   currentTask.task = "req.body";
+  //   db.task.save(currentTask);
+  //   return res(ctx.status(200));
+  // }),
 ];
