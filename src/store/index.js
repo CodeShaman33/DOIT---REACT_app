@@ -1,104 +1,74 @@
-import {v4 as uuid } from 'uuid'
-import { createSlice, configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
-import { createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
-
-
-const initialTasksState = [
-    {
-        id: uuid(),
-        content: 'first task orem ipsum content',
-        priority: 1,
-        // done: false,
-    }
-]
-
-
-
-
+// import {v4 as uuid } from 'uuid'
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const notesApi = createApi({
-    baseQuery: fetchBaseQuery({
-        baseUrl: '/',
+  baseQuery: fetchBaseQuery({
+    baseUrl: "/",
+  }),
+  tagTypes: ["Notes"],
+  endpoints: (builder) => ({
+    getNotes: builder.query({
+      query: () => "notes",
+      providesTags: ["Notes"],
     }),
-    tagTypes: ['Notes'],
-    endpoints: (builder) => ({
-        getNotes: builder.query({
-            query: () => 'notes',
-            providesTags: ['Notes'],
-        }),
-        addNote: builder.mutation({
-            query: (body) => ({
-                url: 'notes',
-                method: 'POST',
-                body,  
-            }),
-            invalidatesTags: ['Notes'],  
-        }),
-        removeNote: builder.mutation({
-            query: (id) => ({
-                url: `notes/${id}`,
-                method: 'DELETE',
-                }),
-                invalidatesTags: ['Notes'],
-            })
-        })
-    })
+    addNote: builder.mutation({
+      query: (body) => ({
+        url: "notes",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Notes"],
+    }),
+    removeNote: builder.mutation({
+      query: (id) => ({
+        url: `notes/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Notes"],
+    }),
+  }),
+});
 
-
-export const {useGetNotesQuery, useAddNoteMutation, useRemoveNoteMutation } = notesApi;
+export const { useGetNotesQuery, useAddNoteMutation, useRemoveNoteMutation } =
+  notesApi;
 export const api = notesApi;
 
-
-const tasksSlice = createSlice({
-    name: 'tasks',
-    initialState: initialTasksState,
-    reducers: {
-        addTask(state, action) {
-            state.push({
-                id: uuid(),
-                ...action.payload,
-            })
-        },
-        removeTask(state, action) {},
-    }
-
-})
-
-const tasks = createApi({
-    baseQuery: fetchBaseQuery({
-        baseUrl: '/',
+const tasksApi = createApi({
+  reducerPath: "tasksApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "/",
+  }),
+  tagTypes: ["Tasks"],
+  endpoints: (builder) => ({
+    getTasks: builder.query({
+      query: () => "tasks",
+      providesTags: ["Tasks"],
     }),
-    tagTypes: ['Tasks'],
-    endpoints: (builder) => ({
-        getNotes: builder.query({
-            query: () => '/',
-            providesTags: ['Tasks'],
-        }),
-        addNote: builder.mutation({
-            query: (body) => ({
-                url: 'notes',
-                method: 'POST',
-                body,  
-            }),
-            invalidatesTags: ['Notes'],  
-        })
-    })
-})
+    addTask: builder.mutation({
+      query: (body) => ({
+        url: "tasks",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Tasks"],
+    }),
+  }),
+});
 
-
-
-// export const {addNote, removeNote} = notesSlice.actions
-export const {addTask, removeTask} = tasksSlice.actions
-
+export const { useGetTasksQuery, useAddTaskMutation } = tasksApi;
+export const api2 = tasksApi;
 
 export const store = configureStore({
+  reducer: {
+    [tasksApi.reducerPath]: tasksApi.reducer,
 
-    reducer: {
-        [notesApi.reducerPath]: notesApi.reducer,
-        tasks: tasksSlice.reducer
+    [notesApi.reducerPath]: notesApi.reducer,
+    // tasks: tasksSlice.reducer
+  },
 
-    },
-
-    middleware: () =>
-    getDefaultMiddleware().concat(api.middleware),
-})
+  middleware: () =>
+    getDefaultMiddleware()
+      .concat(notesApi.middleware)
+      .concat(tasksApi.middleware),
+});

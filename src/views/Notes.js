@@ -1,25 +1,30 @@
-import React from "react";
-import Note from "components/molecules/Note/Note";
-import { Wrapper, FormWrapper, NotesWrapper } from "./Notes.style";
+import React, { useEffect } from "react";
+import { Wrapper, FormWrapper } from "./Notes.style";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { addNote } from "store";
+// import { useDispatch } from "react-redux";
+// import { addNote } from "store";
 import { useState } from "react";
+import { useAddNoteMutation } from "store";
 
 const Notes = () => {
   const notes = useSelector((state) => state.notes);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
+  const [addNote, rest] = useAddNoteMutation();
+
+  useEffect(() => {
+    console.log(rest);
+  },[rest])
 
   const handleAddNote = (e) => {
     e.preventDefault();
-    dispatch(
+  
       addNote({
         title: newTitle,  
         content: newContent,
       })
-    );
+    
   };
   return (
     <Wrapper>
@@ -43,16 +48,7 @@ const Notes = () => {
           Add Note
         </button>
       </FormWrapper>
-      <NotesWrapper>
-        {console.log(notes)}
-        {notes.length > 0 ? (
-          notes.map(({ title, content, id }) => (
-            <Note noteId={id} title={title} content={content} />
-          ))
-        ) : (
-          <h2>no notes yet</h2>
-        )}
-      </NotesWrapper>
+ 
     </Wrapper>
   );
 };

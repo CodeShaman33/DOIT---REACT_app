@@ -5,24 +5,31 @@ import { Wrapper, FormWrapper } from "./TasksList.style";
 import TaskItem from "components/atoms/TaskItem/TaskItem";
 // import { TaskWrapper } from "components/atoms/TaskItem/TaskItem.style";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { addTask } from "store";
+// import { useDispatch } from "react-redux";
+import { useAddTaskMutation } from "store";
 
 
 const TasksList = ({tasks, handleOpenTaskDetail}) => {
-  const storedTasks = useSelector((state) => state.tasks);
-  const dispatch = useDispatch();
 
+  
+
+  const storedTasks = useSelector((state) => state.tasks);
+  // const dispatch = useDispatch();
+  const[addTask, rest] = useAddTaskMutation();
+  console.log(rest);
 const[newContent, setNewContent] = useState('');
 const[priority, setPriority] = useState(4);
 
 const handleAddTask = (e) => {
   e.preventDefault();
 
-    dispatch(addTask({
+    addTask({
       content: newContent,
       priority: priority,
-    }))
+    })
+
+    console.log('add task started');
+
 }
 
 

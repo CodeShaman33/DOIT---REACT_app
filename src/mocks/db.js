@@ -21,4 +21,10 @@ export const db = factory({
     login: () => "luckyloki33@gmail.com",
     password: () => "1234",
   },
+
+  note: {
+    id: primaryKey(faker.datatype.uuid),
+    title: () => 'lorem ipsum dolor sit amet ',
+    content: () => 'lorem ipsum dolor sit amet',
+  }
 });

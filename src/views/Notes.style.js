@@ -2,18 +2,18 @@ import styled from "styled-components";
 
 
 export const  Wrapper = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     grid-gap: 30px;
     padding: 10px;
 `
 
 export const FormWrapper = styled.div`
-    background-color: white;
+    background-color: #28989c;
     border-radius: 25px;
-    width: 100%;
-    height: 350px;
+    width: 80%;
+    height: 400px;
     padding: 10px;
     display: flex;
     flex-direction: column;

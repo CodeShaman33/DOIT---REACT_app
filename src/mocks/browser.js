@@ -18,3 +18,7 @@ window.mocks = {
 }
 
 db.user.create();
+
+db.note.create();
+db.note.create();
+db.note.create();
