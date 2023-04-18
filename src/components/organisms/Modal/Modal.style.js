@@ -7,8 +7,8 @@ export const Wrapper = styled(ReactModal)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-width: 600px;
-  min-height: 600px;
+  min-width: 400px;
+  min-height: 300px;
   background-color: aquamarine; 
   border-radius: 15px;
   -webkit-box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 1);

@@ -55,16 +55,37 @@ export const tasksHandlers = [
     return res(ctx.status(400), ctx.json({
       error: 'please try again'
     }))
+  }),
+
+  rest.put('tasks/:id', (req, res, ctx) => {
+    console.log(`TASK UPDATE STARTED for task ID: ${req.params.id}`);
+    const newString = Object.values(req.body).join('');
+    console.log(newString);
+  
+    const taskId = req.params.id;
+    const updatedTask = db.task.findFirst({
+      where: {
+        id: {
+          equals: taskId,
+        }
+      }
+    })
+    console.log(updatedTask);
+  
+    if (!updatedTask) {
+      return res(ctx.status(404));
+    }
+  
+    if (newString !== updatedTask.content) {
+      updatedTask.content = newString;
+    }
+  
+    db.task.update(taskId, updatedTask);
+    console.log(updatedTask);
+  
+    return res(ctx.status(200));
   })
+  
 
-    // rest.put(`/api/updateTask/:id`, (req, res, ctx) => {
-  //   const id = req.params.id;
-  //   console.log(id);
-
-  //   const currentTask = db.task.findFirst({ where: { id: id } });
-
-  //   currentTask.task = "req.body";
-  //   db.task.save(currentTask);
-  //   return res(ctx.status(200));
-  // }),
+  
 ];
