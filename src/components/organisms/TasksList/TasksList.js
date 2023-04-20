@@ -12,11 +12,16 @@ const TasksList = ({ tasks, handleOpenTaskDetail }) => {
 
   const handleAddTask = (e) => {
     e.preventDefault();
-
-    addTask({
-      content: newContent,
-      priority: priority,
-    });
+    const noLettersOrNumbers = /[a-zA-Z]|[0-9]/.test(newContent);
+    if(noLettersOrNumbers){
+      addTask({
+        content: newContent,
+        priority: priority,
+      });
+    } else {
+      alert('content required');
+    }
+    
 
     console.log("add task started");
   };
