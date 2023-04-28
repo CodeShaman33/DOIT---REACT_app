@@ -68,12 +68,31 @@ const tasksApi = createApi({
         method: "PUT",
         body
       })
+    }),
+
+    completeTask: builder.mutation({
+      query: (id) => ({
+        url: `tasks/complete/${id}`,
+        method: "PUT",
+        
+      })
+    }), 
+
+    changePriority: builder.mutation({
+      query: ({id,  ...body}) => ({
+        url: `tasks/priority/${id}`,
+        method: "PUT",
+        body,
+        
+      })
     })
+
+    
 
   }),
 });
 
-export const { useGetTasksQuery, useAddTaskMutation, useRemoveTaskMutation, useUpdateTaskMutation  } = tasksApi;
+export const { useGetTasksQuery, useAddTaskMutation, useRemoveTaskMutation, useUpdateTaskMutation, useCompleteTaskMutation, useChangePriorityMutation  } = tasksApi;
 export const api2 = tasksApi;
 
 export const store = configureStore({

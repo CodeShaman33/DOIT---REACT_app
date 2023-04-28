@@ -1,18 +1,19 @@
-import React from "react";
-import { useState } from "react";
-//style
-import { TaskWrapper, MainArea } from "./TaskItem.style";
-//components
+import React, { useState } from "react";
+import { TaskWrapper, MainArea, TaskText } from "./TaskItem.style";
 import CheckBox from "../CheckBox/CheckBox";
-import { useRemoveTaskMutation } from "store";
+import { useRemoveTaskMutation, useCompleteTaskMutation, useChangePriorityMutation } from "store";
 
 const TaskItem = ({task, ...props}) => {
   const [date, setDate] = useState(null);
-  const [removeTask, rest] = useRemoveTaskMutation();
+  const [completeTask] = useCompleteTaskMutation();
+  const [removeTask] = useRemoveTaskMutation();
+  const [changePriority] = useChangePriorityMutation();
+  const [completed, setCompleted] = useState(task.done)
+  const [priority, setPriority] = useState(task.priority)
   const handleDateChange = (event) => {
     setDate(event.target.value);
     console.log(date);
-    console.log(rest);
+ 
   };
 
   const handleRemoveTask = (event) => {
@@ -20,15 +21,32 @@ const TaskItem = ({task, ...props}) => {
     removeTask(task.id)
   }
 
+  const handleCheck = (event) => {
+    console.log('checked checked')
+ 
+      completeTask(task.id)
+      setCompleted(!completed)
+   
+  }
+
+  const handlePriorityChange = (event) => {
+    event.preventDefault();
+    changePriority({id: task.id, ...event.target.value})
+    setPriority(event.target.value)
+  }
+
+  
+
   return (
-    <>
-      <TaskWrapper >
-        <CheckBox priority={task.priority}/>
+  
+      <TaskWrapper checked={completed} priority={priority}>
+        {console.log(priority )}
+        <CheckBox priority={priority} taskChecked={completed} onClick={handleCheck}/>
         <MainArea>
-          <div {...props} className="content">{task.content}</div>
+          <TaskText checked={completed}>{task.content}</TaskText>
           <div className="add-ons">
             <label htmlFor="priority"></label>
-            <select name="priority" id="priority">
+            <select name="priority" id="priority" defaultValue={task.priority} onChange={handlePriorityChange}>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -43,7 +61,7 @@ const TaskItem = ({task, ...props}) => {
           <TaskButton>Delete</TaskButton>
         </Options> */}
       </TaskWrapper>
-    </>
+
   );
 };
 

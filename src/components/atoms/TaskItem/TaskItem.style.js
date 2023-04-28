@@ -4,7 +4,19 @@ import { Button } from "../Button/Button";
 import styled from "styled-components";
 
 export const TaskWrapper = styled(ViewWrapper)`
-  background-color: #28989c;
+  background-color: ${(props) => {
+  if(props.checked){
+    return 'blue';
+  } else {
+    switch(props.priority){
+      case '1': return 'red';
+      case '2': return 'orange';
+      case '3': return 'green';
+      case '4': return 'yellow';
+      default: return 'blue';
+    }
+  }}};
+  
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -65,4 +77,8 @@ export const TaskButton = styled(Button)`
   width: 100%;
   padding: 5px 0;
   border-radius: 10px;
+`;
+
+export const TaskText = styled.div`
+  text-decoration: ${(props) => (props.checked ? "line-through" : "none")};
 `;

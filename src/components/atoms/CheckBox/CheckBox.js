@@ -1,10 +1,10 @@
 import React from "react";
 import { CheckBoxWrapper } from "./CheckBox.style";
 
-const CheckBox = ({priority}) => {
+const CheckBox = ({priority, taskChecked, ...props}) => {
     return (
-        <CheckBoxWrapper priority={priority} className="check-box">
-          <input type="checkbox" />
+        <CheckBoxWrapper {...props} priority={priority} className="check-box">
+          <input type="checkbox" checked={taskChecked}/>
         </CheckBoxWrapper>
     )
 }

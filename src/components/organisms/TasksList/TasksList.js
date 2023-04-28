@@ -5,6 +5,7 @@ import { Wrapper, FormWrapper } from "./TasksList.style";
 import TaskItem from "components/atoms/TaskItem/TaskItem";
 import { useAddTaskMutation } from "store";
 
+
 const TasksList = ({ tasks, handleOpenTaskDetail }) => {
   const [addTask] = useAddTaskMutation();
   const [newContent, setNewContent] = useState("");
@@ -13,15 +14,17 @@ const TasksList = ({ tasks, handleOpenTaskDetail }) => {
   const handleAddTask = (e) => {
     e.preventDefault();
     const noLettersOrNumbers = /[a-zA-Z]|[0-9]/.test(newContent);
-    if(noLettersOrNumbers){
+    if (noLettersOrNumbers) {
       addTask({
         content: newContent,
         priority: priority,
       });
+      document.getElementById("content").defaultValue = "";
     } else {
-      alert('content required');
+      alert("content required");
     }
-    
+
+    setNewContent("");
 
     console.log("add task started");
   };
@@ -31,9 +34,10 @@ const TasksList = ({ tasks, handleOpenTaskDetail }) => {
       <h1>Task List:</h1>
       <FormWrapper as="form" onSubmit={handleAddTask}>
         <label htmlFor="content">content:</label>
-        <input
+        <textarea
           type="text"
           id="content"
+          defaultValue={newContent}
           onChange={(e) => {
             setNewContent(e.target.value);
           }}

@@ -84,8 +84,75 @@ export const tasksHandlers = [
     console.log(updatedTask);
   
     return res(ctx.status(200));
+  }),
+
+  rest.put('tasks/complete/:id', (req, res, ctx) => {
+    const taskId = req.params.id;
+    const completedTask = db.task.findFirst({
+      where: {
+        id: {
+          equals: taskId,
+        },
+      },
+    });
+    const updatedTask = db.task.update({
+      where: {
+        id: {
+          equals: taskId,
+        },
+      },
+      data: {
+        done: !completedTask.done,
+      },
+    });
+    console.log(updatedTask);
+
+    const completedTask2 = db.task.findFirst({
+      where: {
+        id: {
+          equals: taskId,
+        },
+      },
+    });
+    console.log(completedTask2);
+
+    return res(ctx.status(200), ctx.json({completedTask2}));
+  }),
+
+  rest.put('tasks/priority/:id', (req, res, ctx) => {
+    const taskId = req.params.id;
+    console.log('PRIORITY PRIORITY')
+    console.log(req.body[0])
+    // const completedTask = db.task.findFirst({
+    //   where: {
+    //     id: {
+    //       equals: taskId,
+    //     },
+    //   },
+    // });
+    const updatedTask = db.task.update({
+      where: {
+        id: {
+          equals: taskId,
+        },
+      },
+      data: {
+        priority: req.body[0],
+      },
+    });
+    console.log(updatedTask);
+
+    const completedTask2 = db.task.findFirst({
+      where: {
+        id: {
+          equals: taskId,
+        },
+      },
+    });
+    console.log(completedTask2);
+
+    return res(ctx.status(200), ctx.json({completedTask2}));
   })
   
-
   
 ];
