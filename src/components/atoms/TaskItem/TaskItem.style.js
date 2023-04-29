@@ -5,17 +5,19 @@ import styled from "styled-components";
 
 export const TaskWrapper = styled(ViewWrapper)`
   background-color: ${(props) => {
-  if(props.checked){
-    return 'blue';
-  } else {
-    switch(props.priority){
-      case '1': return 'red';
-      case '2': return 'orange';
-      case '3': return 'green';
-      case '4': return 'yellow';
-      default: return 'blue';
+    if(props.checked) {
+      return 'green';
     }
-  }}};
+    else {
+      switch(props.priority) {
+        case 1: return 'red';
+        case 2: return 'orange';
+        case 3: return 'violet';
+        case 4: return 'grey';
+        default: return 'white';
+      }
+    }
+  }};
   
   display: flex;
   flex-direction: row;

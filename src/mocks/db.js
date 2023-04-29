@@ -1,16 +1,20 @@
 import { factory, primaryKey } from "@mswjs/data";
 import { faker } from "@faker-js/faker";
 
+//date
+const startDate = new Date('2022-04-28')
+const endDate = new Date('2022-12-28')
+
 export const db = factory({
   task: {
     id: primaryKey(faker.datatype.uuid),
     content: () =>
       `${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()} ${faker.random.word()}`,
-    date: () =>
-      faker.date.betweens(
-        "2020-01-01T00:00:00.000Z",
-        "2030-01-01T00:00:00.000Z"
-      ),
+    date: () => {
+      const randomDate = faker.date.between(startDate, endDate);
+      const formattedDate = randomDate.toISOString().split('T')[0];
+      return formattedDate;
+    },
     note: () => faker.fake(`{{name.lastName}}`),
     priority: () => faker.datatype.number({ min: 1, max: 4 }),
     done: () => faker.datatype.boolean(),

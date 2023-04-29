@@ -40,7 +40,8 @@ const TaskItem = ({task, ...props}) => {
   return (
   
       <TaskWrapper checked={completed} priority={priority}>
-        {console.log(priority )}
+        {console.log('item redendered')}
+        <p>{priority}</p>
         <CheckBox priority={priority} taskChecked={completed} onClick={handleCheck}/>
         <MainArea>
           <TaskText checked={completed}>{task.content}</TaskText>
@@ -52,7 +53,7 @@ const TaskItem = ({task, ...props}) => {
               <option value="3">3</option>
               <option value="4">4</option>
             </select>
-            <input type="date" onChange={handleDateChange} />
+            <input type="date" onChange={handleDateChange} defaultValue={task.date}/>
             <button onClick={handleRemoveTask}>delete</button>
           </div>
         </MainArea>

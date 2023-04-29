@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-//styles
 import { Wrapper, FormWrapper } from "./TasksList.style";
-//components
 import TaskItem from "components/atoms/TaskItem/TaskItem";
 import { useAddTaskMutation } from "store";
-
 
 const TasksList = ({ tasks, handleOpenTaskDetail }) => {
   const [addTask] = useAddTaskMutation();
@@ -23,11 +20,17 @@ const TasksList = ({ tasks, handleOpenTaskDetail }) => {
     } else {
       alert("content required");
     }
-
     setNewContent("");
-
-    console.log("add task started");
   };
+
+  const sortedTasks = [...tasks].sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return dateB.getTime() - dateA.getTime();
+  });
+
+  console.log(sortedTasks)
+  
 
   return (
     <Wrapper>
@@ -57,7 +60,7 @@ const TasksList = ({ tasks, handleOpenTaskDetail }) => {
         </select>
         <button type="submit">add task</button>
       </FormWrapper>
-      {tasks.map((task) => (
+      {sortedTasks.map((task) => (
         <TaskItem
           onClick={() => handleOpenTaskDetail(task)}
           task={task}
