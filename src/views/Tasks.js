@@ -1,54 +1,64 @@
-import React from 'react'
+import React from "react";
 import TasksList from "components/organisms/TasksList/TasksList";
 // import { useTasks } from "hooks/useTasks";
 import useModal from "hooks/useModal";
-import { useState } from "react";
-import {useGetTasksQuery, useUpdateTaskMutation} from 'store'
-
-
+import { useGetTasksQuery } from "store";
+import { useAddTaskMutation } from "store";
 
 const Tasks = () => {
+  const [addTask] = useAddTaskMutation();
 
+  const { data, isLoading } = useGetTasksQuery();
+  console.log(data, isLoading);
 
-    const {data, isLoading} = useGetTasksQuery()  
-   console.log(data, isLoading)
+  const { Modal, modalState, handleModalClose, handleModalOpen } = useModal();
 
- 
-  const { Modal,  modalState, handleModalOpen, handleModalClose } = useModal();
-  const [modalData, setModalData] = useState({});
-  const [editedContent, setEditedContent] = useState('');
-  const [updateTask] = useUpdateTaskMutation();
-  // handleModalClose, handleModalOpen,
-  const handleOpenTaskDetail = (taskData) => {
-    console.log(taskData);
-    setEditedContent(taskData.content);
-    setModalData(taskData);
+  const handleAddTask = () => {
     handleModalOpen();
-  }
+  };
 
-const handleEditTask = (e) => {
-  e.preventDefault();
-  updateTask({id: modalData.id, ...editedContent})
-}
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const content = event.target.elements.content.value;
+    const priority = event.target.elements.priority.value;
+    const date = event.target.elements.date.value;
+
+    const task = {
+      content,
+      priority,
+      date,
+    };
+
+    console.log(task);
+    addTask(task)
+  };
 
   return (
-
     <>
-    {data ? <TasksList tasks={data.tasks} handleOpenTaskDetail={handleOpenTaskDetail} /> : <h2>Loading...</h2>}
-   <Modal isOpen={modalState} handleModalClose={handleModalClose}>
-      
-
-      <textarea name="" id="" cols="30" rows="10" onChange={(e) => setEditedContent(e.target.value)} defaultValue={modalData.content} />
-
-      <label htmlFor="taskchange">edit task</label>
-
-      <button onClick={handleEditTask}>edit task</button>
-      <h3>{editedContent}</h3>
-    </Modal>
-   </>
-  )
-   
- 
+      {data ? (
+        <TasksList
+          tasks={data.tasks}
+          modalState={modalState}
+          handleModalOpen={handleAddTask}
+        />
+      ) : (
+        <h2>Loading...</h2>
+      )}
+      <Modal isOpen={modalState} handleModalClose={handleModalClose}>
+        <form onSubmit={handleSubmit}>
+          <textarea name="content" id="content" cols="30" rows="10"></textarea>
+          <select name="priority" id="priority">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <input type="date" id="date" name="date" defaultValue={'2023-04-29'}/>
+          <button type="submit">add task</button>
+        </form>
+      </Modal>
+    </>
+  );
 };
 
 export default Tasks;

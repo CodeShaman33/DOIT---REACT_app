@@ -15,24 +15,26 @@ export const tasksHandlers = [
   rest.post('tasks', (req, res, ctx) => {
     console.log('TASK POST STARTED');
     console.log(req.body);
-    if(req.body.content && req.body.priority){
+    // if(req.body.content && req.body.priority){
       
 
       const newTask = {
         id: faker.datatype.uuid(),
-        priority: req.body.priority,
-        content: req.body.content 
+        priority: parseInt(req.body.priority, 10),
+        content: req.body.content,
+        date: req.body.date,
+
       }
 
       db.task.create(newTask);
       console.log(newTask);
 
-      return res(ctx.status(200))
+      return res(ctx.status(200), ctx.json({newTask}))
 
-    } else {
-      return res(ctx.status(400))
+    // } else {
+    //   return res(ctx.status(400))
 
-    }
+    // }
 
   }),
 

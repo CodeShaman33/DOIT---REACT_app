@@ -1,27 +1,28 @@
-import React, { useState } from "react";
-import { Wrapper, FormWrapper } from "./TasksList.style";
+import React from "react";
+import { Wrapper } from "./TasksList.style";
 import TaskItem from "components/atoms/TaskItem/TaskItem";
-import { useAddTaskMutation } from "store";
+// import { useAddTaskMutation } from "store";
 
-const TasksList = ({ tasks, handleOpenTaskDetail }) => {
-  const [addTask] = useAddTaskMutation();
-  const [newContent, setNewContent] = useState("");
-  const [priority, setPriority] = useState(4);
 
-  const handleAddTask = (e) => {
-    e.preventDefault();
-    const noLettersOrNumbers = /[a-zA-Z]|[0-9]/.test(newContent);
-    if (noLettersOrNumbers) {
-      addTask({
-        content: newContent,
-        priority: priority,
-      });
-      document.getElementById("content").defaultValue = "";
-    } else {
-      alert("content required");
-    }
-    setNewContent("");
-  };
+const TasksList = ({ tasks, handleModalOpen, modalState }) => {
+  // const [addTask] = useAddTaskMutation();
+  // const [newContent, setNewContent] = useState("");
+  // const [priority, setPriority] = useState(4);
+
+  // const handleAddTask = (e) => {
+  //   e.preventDefault();
+  //   const noLettersOrNumbers = /[a-zA-Z]|[0-9]/.test(newContent);
+  //   if (noLettersOrNumbers) {
+  //     addTask({
+  //       content: newContent,
+  //       priority: priority,
+  //     });
+  //     document.getElementById("content").defaultValue = "";
+  //   } else {
+  //     alert("content required");
+  //   }
+  //   setNewContent("");
+  // };
 
   const sortedTasks = [...tasks].sort((a, b) => {
     const dateA = new Date(a.date);
@@ -29,13 +30,17 @@ const TasksList = ({ tasks, handleOpenTaskDetail }) => {
     return dateB.getTime() - dateA.getTime();
   });
 
-  console.log(sortedTasks)
-  
+  const handleButtonClick = (e) => {
+    e.preventDefault();
+    console.log(modalState)
+    handleModalOpen();
+  }
 
   return (
     <Wrapper>
       <h1>Task List:</h1>
-      <FormWrapper as="form" onSubmit={handleAddTask}>
+      <button onClick={handleButtonClick}>add task</button>
+      {/* <FormWrapper as="form" onSubmit={handleAddTask}>
         <label htmlFor="content">content:</label>
         <textarea
           type="text"
@@ -59,10 +64,9 @@ const TasksList = ({ tasks, handleOpenTaskDetail }) => {
           <option value="4">4 </option>
         </select>
         <button type="submit">add task</button>
-      </FormWrapper>
+      </FormWrapper> */}
       {sortedTasks.map((task) => (
         <TaskItem
-          onClick={() => handleOpenTaskDetail(task)}
           task={task}
           key={task.id}
         />
