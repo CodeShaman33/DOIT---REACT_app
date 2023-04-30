@@ -17,7 +17,7 @@ export const db = factory({
     },
     note: () => faker.fake(`{{name.lastName}}`),
     priority: () => faker.datatype.number({ min: 1, max: 4 }),
-    done: () => faker.datatype.boolean(),
+    done: () => false,
   },
 
   user: {

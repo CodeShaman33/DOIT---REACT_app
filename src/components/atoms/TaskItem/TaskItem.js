@@ -31,8 +31,8 @@ const TaskItem = ({task, ...props}) => {
 
   const handlePriorityChange = (event) => {
     event.preventDefault();
-    changePriority({id: task.id, ...event.target.value})
-    setPriority(event.target.value)
+    changePriority({id: task.id, ...parseInt(event.target.value, 10)});
+    setPriority(parseInt(event.target.value, 10))
   }
 
   
@@ -42,6 +42,7 @@ const TaskItem = ({task, ...props}) => {
       <TaskWrapper checked={completed} priority={priority}>
         {console.log('item redendered')}
         <p>{priority}</p>
+        <p>{typeof(priority)}</p>
         <CheckBox priority={priority} taskChecked={completed} onClick={handleCheck}/>
         <MainArea>
           <TaskText checked={completed}>{task.content}</TaskText>
@@ -57,10 +58,7 @@ const TaskItem = ({task, ...props}) => {
             <button onClick={handleRemoveTask}>delete</button>
           </div>
         </MainArea>
-        {/* <Options>
-          <TaskButton>Set Date</TaskButton>
-          <TaskButton>Delete</TaskButton>
-        </Options> */}
+
       </TaskWrapper>
 
   );
